@@ -2,7 +2,7 @@ import { RegisterSchema } from "@/schemas/auth";
 import { z } from "zod";
 import axios from "axios"
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api"
+const API_URL = import.meta.env.VITE_API_URL
 
 export const register = async (data: z.infer<typeof RegisterSchema>) => {
     try {
