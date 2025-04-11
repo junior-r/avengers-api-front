@@ -9,7 +9,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar'
-import { ArrowLeftIcon, Ellipsis, KeyIcon, LogOutIcon, User2Icon } from 'lucide-react'
+import { ArrowLeftIcon, Ellipsis, KeyIcon, User2Icon } from 'lucide-react'
 import LogoutBtn from '@/components/custom/LogoutBtn'
 import { Link, useLocation } from 'react-router-dom'
 import { ReactNode } from 'react'
@@ -85,19 +85,12 @@ function AppSidebar({ user }: Props) {
                 )}
               </SidebarMenuItem>
             ))}
-            <SidebarMenuItem className="text-sm">
-              <SidebarMenuButton asChild>
-                <div className="flex items-center gap-2">
-                  <LogOutIcon />
-                  <LogoutBtn />
-                </div>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter>
+      <SidebarFooter className="flex-row items-center justify-between gap-4">
         <ModeToggle />
+        <LogoutBtn showIcon={true} />
       </SidebarFooter>
     </Sidebar>
   )
