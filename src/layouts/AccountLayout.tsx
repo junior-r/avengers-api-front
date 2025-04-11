@@ -2,6 +2,7 @@ import AppSidebar from '@/components/pages/user/Sidebar'
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
 import { useRequireAuth } from '@/hooks/useRequireAuth'
 import { useAuthStore } from '@/store/auth/useAuthStore'
+import { Outlet } from 'react-router-dom'
 
 function Profile() {
   const user = useAuthStore((state) => state.user)
@@ -18,7 +19,10 @@ function Profile() {
             </main>
           </SidebarProvider>
         </section>
-        <section className="w-full p-6 max-w-screen-2xl mx-auto">Content</section>
+        <section className="w-full p-6 max-w-screen-2xl mx-auto">
+          layout
+          <Outlet />
+        </section>
       </section>
     </section>
   )

@@ -9,7 +9,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar'
-import { ArrowLeftIcon, Ellipsis, LogOutIcon, User2Icon } from 'lucide-react'
+import { ArrowLeftIcon, Ellipsis, KeyIcon, LogOutIcon, User2Icon } from 'lucide-react'
 import LogoutBtn from '@/components/custom/LogoutBtn'
 import { Link, useLocation } from 'react-router-dom'
 import { ReactNode } from 'react'
@@ -29,21 +29,27 @@ type MenuItem = {
 
 const menuItems: MenuItem[] = [
   {
-    name: 'Profile',
-    path: '/profile',
-    icon: <User2Icon />,
-    asLink: true,
-  },
-  {
     name: 'Go Back',
     path: '/',
     icon: <ArrowLeftIcon />,
     asLink: true,
   },
   {
+    name: 'Profile',
+    path: '/account/profile',
+    icon: <User2Icon />,
+    asLink: true,
+  },
+  {
     name: 'Change Password',
-    path: '/change-password',
+    path: '/account/change-password',
     icon: <Ellipsis />,
+    asLink: true,
+  },
+  {
+    name: 'Token',
+    path: '/account/token',
+    icon: <KeyIcon />,
     asLink: true,
   },
 ]

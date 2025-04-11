@@ -4,7 +4,10 @@ import LoginPage from './pages/auth/Login.tsx'
 import ResgisterPage from './pages/auth/Register.tsx'
 import { MainLayout } from './layouts/MainLayout.tsx'
 import AuthLayout from './layouts/AuthLayout.tsx'
-import Profile from './pages/user/Profile.tsx'
+import Profile from './pages/account/user/Profile.tsx'
+import AccountLayout from './layouts/AccountLayout.tsx'
+import ChangePassword from './pages/account/user/ChangePassword.tsx'
+import TokenPage from './pages/account/user/Token.tsx'
 
 export const Router = createBrowserRouter([
   {
@@ -17,8 +20,22 @@ export const Router = createBrowserRouter([
         element: <App />,
       },
       {
-        path: '/profile',
-        element: <Profile />,
+        path: '/account',
+        element: <AccountLayout />,
+        children: [
+          {
+            path: 'profile',
+            element: <Profile />,
+          },
+          {
+            path: 'change-password',
+            element: <ChangePassword />,
+          },
+          {
+            path: 'token',
+            element: <TokenPage />,
+          },
+        ],
       },
       {
         path: '/auth',

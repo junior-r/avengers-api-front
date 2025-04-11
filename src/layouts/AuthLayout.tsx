@@ -4,7 +4,6 @@ import { Outlet } from 'react-router-dom'
 
 function Layout() {
   const user = useAuthStore((state) => state.user)
-
   useRequireAuth(false)
 
   if (!user) {
