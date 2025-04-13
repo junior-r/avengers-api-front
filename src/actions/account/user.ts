@@ -1,4 +1,4 @@
-import { ProfileSchema } from "@/schemas/user"
+import { ChangePasswordSchema, ProfileSchema } from "@/schemas/user"
 import axios from "axios"
 import { z } from "zod"
 
@@ -10,6 +10,23 @@ export const updateUser = async (id: string, data: z.infer<typeof ProfileSchema>
             headers: {
                 "Content-Type": "application/json"
             }
+        })
+        return res
+    } catch (error) {
+        if (axios.isAxiosError(error)) {
+            return error.response?.data || { error: "An unknown error occurred" }
+        }
+        return { error: "An unknown error occurred" }
+    }
+}
+
+export const changePassword = async (id: string, data: z.infer<typeof ChangePasswordSchema>) => {
+    try {
+        const res = await axios.patch(`${API_URL}/users/change-password/${id}`, data, {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            withCredentials: true
         })
         return res
     } catch (error) {

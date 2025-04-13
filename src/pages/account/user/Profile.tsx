@@ -3,7 +3,6 @@ import { useRequireAuth } from '@/hooks/useRequireAuth'
 import { ProfileSchema } from '@/schemas/user'
 import { useAuthStore } from '@/store/auth/useAuthStore'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -11,17 +10,17 @@ import { Label } from '@/components/ui/label'
 import { z } from 'zod'
 import ErrorForm from '@/components/custom/ErrorForm'
 import SuccessForm from '@/components/custom/SuccessForm'
+import { useResponseStatusStore } from '@/store/api/useResponseStatus'
 
 function Profile() {
-  const user = useAuthStore((state) => state.user)
-  const setUser = useAuthStore((state) => state.setUser)
   useRequireAuth()
 
-  const [responseStatus, setResponseStatus] = useState({
-    error: false,
-    success: false,
-    message: '',
-  })
+  const user = useAuthStore((state) => state.user)
+  const setUser = useAuthStore((state) => state.setUser)
+  const successStatus = useResponseStatusStore((state) => state.successStatus)
+  const setSuccess = useResponseStatusStore((state) => state.setSuccess)
+  const errorStatus = useResponseStatusStore((state) => state.errorStatus)
+  const setError = useResponseStatusStore((state) => state.setError)
 
   const {
     register,
@@ -38,15 +37,14 @@ function Profile() {
   const onSubmit: SubmitHandler<z.infer<typeof ProfileSchema>> = async (data) => {
     if (!user) return
     const res = await updateUser(user.id, data)
-    console.log(res)
 
     if (res.error) {
-      setResponseStatus({ error: true, success: false, message: res.error })
+      setError(res.error)
       return
     }
 
     if (res.status === 200) {
-      setResponseStatus({ error: false, success: true, message: 'User updated successfully!' })
+      setSuccess('User updated successfully!')
       setUser(res.data)
     }
   }
@@ -70,8 +68,9 @@ function Profile() {
             {errors.lastName && <ErrorForm message={errors.lastName.message || ''} />}
           </div>
         </div>
-        {responseStatus.error && <ErrorForm message={responseStatus.message} />}
-        {responseStatus.success && <SuccessForm message={responseStatus.message} />}
+
+        {errorStatus.error && <ErrorForm message={errorStatus.message} />}
+        {successStatus.success && <SuccessForm message={successStatus.message} />}
 
         <Button className="w-full" type="submit" disabled={isLoading}>
           {isLoading ? 'Loading...' : 'Update'}

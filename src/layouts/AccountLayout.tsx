@@ -1,5 +1,6 @@
 import AppSidebar from '@/components/pages/user/Sidebar'
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
+import { useAutoClearResponseStatus } from '@/hooks/useAutoClearResponseStatus'
 import { useRequireAuth } from '@/hooks/useRequireAuth'
 import { useAuthStore } from '@/store/auth/useAuthStore'
 import { Outlet } from 'react-router-dom'
@@ -7,6 +8,7 @@ import { Outlet } from 'react-router-dom'
 function Profile() {
   const user = useAuthStore((state) => state.user)
   useRequireAuth()
+  useAutoClearResponseStatus()
 
   return (
     <section className="w-full h-full">

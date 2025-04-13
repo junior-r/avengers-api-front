@@ -1,3 +1,4 @@
+import { useAutoClearResponseStatus } from '@/hooks/useAutoClearResponseStatus'
 import { useRequireAuth } from '@/hooks/useRequireAuth'
 import { useAuthStore } from '@/store/auth/useAuthStore'
 import { Outlet } from 'react-router-dom'
@@ -5,6 +6,7 @@ import { Outlet } from 'react-router-dom'
 function Layout() {
   const user = useAuthStore((state) => state.user)
   useRequireAuth(false)
+  useAutoClearResponseStatus()
 
   if (!user) {
     return (
