@@ -9,16 +9,14 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { z } from 'zod'
 import ErrorForm from '@/components/custom/ErrorForm'
-import SuccessForm from '@/components/custom/SuccessForm'
 import { useResponseStatusStore } from '@/store/api/useResponseStatus'
+import { toast } from 'sonner'
 
 function Profile() {
   useRequireAuth()
 
   const user = useAuthStore((state) => state.user)
   const setUser = useAuthStore((state) => state.setUser)
-  const successStatus = useResponseStatusStore((state) => state.successStatus)
-  const setSuccess = useResponseStatusStore((state) => state.setSuccess)
   const errorStatus = useResponseStatusStore((state) => state.errorStatus)
   const setError = useResponseStatusStore((state) => state.setError)
 
@@ -44,7 +42,7 @@ function Profile() {
     }
 
     if (res.status === 200) {
-      setSuccess('User updated successfully!')
+      toast.success('User updated successfully!')
       setUser(res.data)
     }
   }
@@ -70,7 +68,6 @@ function Profile() {
         </div>
 
         {errorStatus.error && <ErrorForm message={errorStatus.message} />}
-        {successStatus.success && <SuccessForm message={successStatus.message} />}
 
         <Button className="w-full" type="submit" disabled={isLoading}>
           {isLoading ? 'Loading...' : 'Update'}

@@ -7,7 +7,7 @@ import AuthLayout from './layouts/AuthLayout.tsx'
 import Profile from './pages/account/user/Profile.tsx'
 import AccountLayout from './layouts/AccountLayout.tsx'
 import ChangePassword from './pages/account/user/ChangePassword.tsx'
-import TokenPage from './pages/account/user/Token.tsx'
+import TokenPage from './pages/account/user/token'
 
 export const Router = createBrowserRouter([
   {
