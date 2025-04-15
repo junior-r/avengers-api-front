@@ -5,7 +5,7 @@ import { useRequireAuth } from '@/hooks/useRequireAuth'
 import { useAuthStore } from '@/store/auth/useAuthStore'
 import { Outlet } from 'react-router-dom'
 
-function Profile() {
+function AccountLayout() {
   const user = useAuthStore((state) => state.user)
   useRequireAuth()
   useAutoClearResponseStatus()
@@ -30,4 +30,4 @@ function Profile() {
   )
 }
 
-export default Profile
+export default AccountLayout
