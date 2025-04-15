@@ -17,7 +17,6 @@ export const MainLayout = () => {
         } else {
           setUser(null)
         }
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (_err) {
         setUser(null)
       } finally {
